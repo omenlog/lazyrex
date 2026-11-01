@@ -6,8 +6,8 @@ Open one stateful LazyGit floating window per Neovim instance in [Rex](https://w
 
 `setup()` installs the Rex integration automatically:
 
-- writes generated `init.lua`, `lazygit.yml`, and `lazygit-edit` files under `~/.config/rex/lazygit/`;
-- adds `require("lazygit")` to `~/.config/rex/init.lua` if it is missing;
+- writes generated `init.lua`, `lazygit.yml`, and `lazygit-edit` files under `~/.config/rex/lazyrex/`;
+- adds `require("lazyrex")` to `~/.config/rex/init.lua` if it is missing;
 - reloads Rex when the `rex` CLI is available.
 
 `<leader>g` opens LazyGit for the current Rex pane's working directory. Selecting a file opens it in the Neovim instance that started LazyGit, then minimizes the float without stopping LazyGit. Press `<leader>g` again to restore the same float and its state.
@@ -48,4 +48,4 @@ The files generated under `~/.config/rex/` are owned by this plugin. Configure t
 
 ## Health check
 
-Run `:checkhealth lazyrex` to verify the Rex configuration directory, generated `~/.config/rex/lazygit/` integration directory and files, and the `lazygit` executable.
+Run `:checkhealth lazyrex` to verify the Rex configuration directory, generated `~/.config/rex/lazyrex/` integration directory and files, and the `lazygit` executable.

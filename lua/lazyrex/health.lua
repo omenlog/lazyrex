@@ -41,7 +41,7 @@ function M.check()
 	vim.health.start("lazyrex.nvim")
 
 	local rex_dir = rex_config_dir()
-	local integration_dir = rex_dir .. "/lazygit"
+	local integration_dir = rex_dir .. "/lazyrex"
 	check_directory(rex_dir, "Rex configuration directory")
 	check_directory(integration_dir, "LazyGit Rex integration directory")
 	check_file(rex_dir .. "/init.lua", "Rex configuration loader")
