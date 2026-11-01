@@ -14,7 +14,7 @@ local function check_directory(path, label)
 		vim.health.ok(label .. ": " .. path)
 	else
 		vim.health.error(label .. " is missing: " .. path, {
-			"Run require(\"lazygit\").setup() to install the Rex integration.",
+			"Run require(\"lazyrex\").setup() to install the Rex integration.",
 		})
 	end
 end
@@ -22,14 +22,14 @@ end
 local function check_file(path, label, executable)
 	if vim.fn.filereadable(path) ~= 1 then
 		vim.health.error(label .. " is missing: " .. path, {
-			"Run require(\"lazygit\").setup() to regenerate the Rex integration.",
+			"Run require(\"lazyrex\").setup() to regenerate the Rex integration.",
 		})
 		return
 	end
 
 	if executable and vim.fn.executable(path) ~= 1 then
 		vim.health.error(label .. " is not executable: " .. path, {
-			"Run require(\"lazygit\").setup() to repair its permissions.",
+			"Run require(\"lazyrex\").setup() to repair its permissions.",
 		})
 		return
 	end
@@ -38,7 +38,7 @@ local function check_file(path, label, executable)
 end
 
 function M.check()
-	vim.health.start("lazygit.nvim")
+	vim.health.start("lazyrex.nvim")
 
 	local rex_dir = rex_config_dir()
 	local integration_dir = rex_dir .. "/lazygit"

@@ -1,4 +1,4 @@
-# lazygit.nvim
+# lazyrex.nvim
 
 Open one stateful LazyGit floating window per Neovim instance in [Rex](https://www.superlogical.com/rex/).
 
@@ -23,14 +23,13 @@ Neovim must be running inside a Rex terminal for `<leader>g` to open the float.
 
 ## Installation
 
-With lazy.nvim and a local checkout:
+With [lazy.nvim](https://github.com/folke/lazy.nvim):
 
 ```lua
 {
-  dir = vim.fn.expand("~/.config/nvim-plugins/lazygit"),
-  name = "lazygit.nvim",
+  "omenlog/lazyrex",
   config = function()
-    require("lazygit").setup()
+    require("lazyrex").setup()
   end,
 }
 ```
@@ -38,7 +37,7 @@ With lazy.nvim and a local checkout:
 ## Configuration
 
 ```lua
-require("lazygit").setup({
+require("lazyrex").setup({
   key = "<leader>g",
   rex_path = "rex",
   bounds = { 0.2, 0.2, 0.7, 0.7 },
@@ -49,4 +48,4 @@ The files generated under `~/.config/rex/` are owned by this plugin. Configure t
 
 ## Health check
 
-Run `:checkhealth lazygit` to verify the Rex configuration directory, generated `~/.config/rex/lazygit/` integration directory and files, and the `lazygit` executable.
+Run `:checkhealth lazyrex` to verify the Rex configuration directory, generated `~/.config/rex/lazygit/` integration directory and files, and the `lazygit` executable.

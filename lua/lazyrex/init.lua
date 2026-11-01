@@ -1,5 +1,5 @@
-local config_module = require("lazygit.config")
-local rex_config = require("lazygit.rex_config")
+local config_module = require("lazyrex.config")
+local rex_config = require("lazyrex.rex_config")
 
 local M = {}
 
