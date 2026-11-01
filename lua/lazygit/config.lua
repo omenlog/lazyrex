@@ -1,0 +1,16 @@
+local M = {}
+
+M.defaults = {
+	key = "<leader>g",
+	rex_path = "rex",
+	bounds = { 0.2, 0.2, 0.7, 0.7 },
+}
+
+---@param options? table
+---@return table
+function M.setup(options)
+	local config = vim.tbl_deep_extend("force", {}, M.defaults, options or {})
+	return config
+end
+
+return M
