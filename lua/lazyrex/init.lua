@@ -40,15 +40,9 @@ end
 ---@param options? table
 function M.setup(options)
 	local config = config_module.setup(options)
-	local err = rex_config.sync(config)
-	if err then
-		vim.notify("lazyrex.nvim: could not configure Rex: " .. err, vim.log.levels.ERROR)
-		return
-	end
-
-	vim.keymap.set("n", config.key, function()
+	vim.api.nvim_create_user_command("Lazyrex", function()
 		open_lazygit(config)
-	end, { desc = "Open LazyGit in Rex" })
+	end, { desc = "Open LazyGit in Rex", force = true })
 end
 
 return M
