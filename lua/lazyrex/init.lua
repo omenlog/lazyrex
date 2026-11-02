@@ -44,6 +44,7 @@ local function open_lazygit(config)
 			nvim_server = server,
 			rex_dir = rex_scripts_dir,
 			bounds = config.bounds,
+			lazygit_command = config.lazygit_command,
 		}),
 	}, { text = true }):wait()
 	if result.code ~= 0 then

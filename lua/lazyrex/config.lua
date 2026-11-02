@@ -3,6 +3,7 @@ local M = {}
 M.defaults = {
 	rex_path = "rex",
 	bounds = { 0.2, 0.2, 0.7, 0.7 },
+	lazygit_command = { "lazygit" },
 }
 
 ---@param options? table

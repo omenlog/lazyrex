@@ -11,6 +11,14 @@ end
 if type(args.rex_dir) ~= "string" or args.rex_dir == "" then
 	error("Missing lazyrex Rex script directory", 0)
 end
+if type(args.lazygit_command) ~= "table" or #args.lazygit_command == 0 then
+	error("Missing LazyGit command", 0)
+end
+for _, argument in ipairs(args.lazygit_command) do
+	if type(argument) ~= "string" or argument == "" then
+		error("Invalid LazyGit command", 0)
+	end
+end
 
 local process, process_err = rex.block.call(terminal, "process", {
 	block_id = rex.block_id,
@@ -59,8 +67,10 @@ local command = {
 	"LAZYREX_REX_DIR=" .. args.rex_dir,
 	"LAZYREX_LABEL=" .. label,
 	"NVIM=" .. args.nvim_server,
-	"lazygit",
 }
+for _, argument in ipairs(args.lazygit_command) do
+	table.insert(command, argument)
+end
 local layer, layer_err = rex.session.new_layer({
 	bounds = args.bounds,
 	focus = true,

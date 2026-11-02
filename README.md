@@ -41,10 +41,20 @@ With [lazy.nvim](https://github.com/folke/lazy.nvim):
 require("lazyrex").setup({
   rex_path = "rex",
   bounds = { 0.2, 0.2, 0.7, 0.7 },
+  lazygit_command = { "lazygit" },
 })
 
 -- Optional: choose your own mapping in your Neovim configuration.
 vim.keymap.set("n", "<leader>g", "<cmd>Lazyrex<CR>", { desc = "Open LazyGit in Rex" })
+```
+
+`lazygit_command` defaults to `{ "lazygit" }`. Set it to a shell command when LazyGit
+requires shell initialization for its child processes, such as Node version-manager setup:
+
+```lua
+require("lazyrex").setup({
+  lazygit_command = { "zsh", "-ic", "exec lazygit" },
+})
 ```
 
 ## Health check
