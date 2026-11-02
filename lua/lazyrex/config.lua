@@ -1,7 +1,6 @@
 local M = {}
 
 M.defaults = {
-	key = "<leader>g",
 	rex_path = "rex",
 	bounds = { 0.2, 0.2, 0.7, 0.7 },
 }

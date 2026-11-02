@@ -1,0 +1,5 @@
+# Used by lazyrex.nvim's bundled Rex scripts.
+os:
+  edit: 'rex do "$LAZYREX_REX_DIR/edit.lua" file="{{filename}}"'
+  editAtLine: 'rex do "$LAZYREX_REX_DIR/edit.lua" file="{{filename}}" line={{line}}'
+  editInTerminal: false
