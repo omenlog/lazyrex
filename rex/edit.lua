@@ -14,22 +14,14 @@ if nvim_server == nil or nvim_server == "" then
 	error("LazyGit was not started by lazyrex.nvim", 0)
 end
 
-local function get_lazygit_layer_id()
-	local view, view_err = rex.session.view({})
-	if view_err ~= nil then return nil, view_err end
-
-	for _, window in ipairs(view.windows or {}) do
-		for _, layer in ipairs(window.layers or {}) do
-			if layer.kind == "floating" then
-				for _, block in ipairs(layer.blocks or {}) do
-					if block.block_id == rex.block_id and block.label == lazygit_label then return layer.layer_id end
-				end
-			end
-		end
-	end
+local rex_dir = os.getenv("LAZYREX_REX_DIR")
+if rex_dir == nil or rex_dir == "" then
+	error("LazyGit was not started by lazyrex.nvim", 0)
 end
+package.path = rex_dir .. "/?.lua;" .. package.path
+local utils = require("utils")
 
-local layer_id, layer_err = get_lazygit_layer_id()
+local layer_id, layer_err = utils.get_floating_layer_id(rex.block_id, lazygit_label)
 if layer_err ~= nil then error(layer_err, 0) end
 if layer_id ~= nil then
 	local _, minimize_err = rex.session.set_layer_state({
