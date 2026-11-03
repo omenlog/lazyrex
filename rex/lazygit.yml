@@ -3,3 +3,14 @@ os:
   edit: 'rex do "$LAZYREX_REX_DIR/edit.lua" file="{{filename}}"'
   editAtLine: 'rex do "$LAZYREX_REX_DIR/edit.lua" file="{{filename}}" line={{line}}'
   editInTerminal: false
+
+keybinding:
+  universal:
+    quit: '<c-q>'
+
+customCommands:
+  - key: 'q'
+    context: 'global'
+    command: 'rex do "$LAZYREX_REX_DIR/minimize.lua"'
+    description: 'Minimize LazyGit'
+    output: 'none'

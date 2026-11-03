@@ -8,11 +8,7 @@ Open one stateful LazyGit floating window per Neovim instance in [Rex](https://w
 
 The command uses `rex do` to run the bundled scripts in this plugin's `rex/` directory. Rex makes the current session and pane available to those scripts, so no Rex action or generated configuration is required.
 
-- `rex/lazygit.lua` creates or restores the LazyGit floating layer.
-- `rex/edit.lua` opens a selected file in the originating Neovim instance and minimizes that layer.
-- `rex/lazygit.yml` tells LazyGit to invoke `edit.lua`.
-
-`:Lazyrex` opens LazyGit for the current Rex pane's working directory. Selecting a file opens it in the Neovim instance that started LazyGit, then minimizes the float without stopping LazyGit. Run `:Lazyrex` again to restore the same float and its state.
+`:Lazyrex` opens LazyGit for the current Rex pane's working directory. For a continuous edit-and-Git flow, lazyrex overrides LazyGit's default `q` quit binding: selecting a file or pressing `q` minimizes the float while LazyGit keeps running. Run `:Lazyrex` again to restore the same process and state without restarting the configured command or shell initialization. Use `<C-q>` to quit LazyGit completely; the next `:Lazyrex` starts a new instance.
 
 ## Requirements
 
@@ -41,21 +37,14 @@ With [lazy.nvim](https://github.com/folke/lazy.nvim):
 require("lazyrex").setup({
   rex_path = "rex",
   bounds = { 0.2, 0.2, 0.7, 0.7 },
-  lazygit_command = { "lazygit" },
+  lazygit_command = { "zsh", "-ic", "exec lazygit" },
 })
 
 -- Optional: choose your own mapping in your Neovim configuration.
 vim.keymap.set("n", "<leader>g", "<cmd>Lazyrex<CR>", { desc = "Open LazyGit in Rex" })
 ```
 
-`lazygit_command` defaults to `{ "lazygit" }`. Set it to a shell command when LazyGit
-requires shell initialization for its child processes, such as Node version-manager setup:
-
-```lua
-require("lazyrex").setup({
-  lazygit_command = { "zsh", "-ic", "exec lazygit" },
-})
-```
+`lazygit_command` is passed directly to the Rex terminal, so it can be any command that starts LazyGit. It defaults to `{ "zsh", "-ic", "exec lazygit" }`, which loads shell initialization before starting LazyGit.
 
 ## Health check
 
