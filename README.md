@@ -10,7 +10,7 @@ The command uses `rex do` to run the bundled scripts in this plugin's `rex/` dir
 
 - `:Lazyrex` opens LazyGit for the current Rex pane's working directory. For a continuous edit-and-Git flow.
 - lazyrex overrides LazyGit's default `q` quit binding: selecting a file or pressing `q` minimizes the float while LazyGit keeps running. Run `:Lazyrex` again to restore the same process and state without restarting the configured command or shell initialization. Use `<C-q>` to quit LazyGit completely; the next `:Lazyrex` starts a new instance.
-- When Neovim exits, lazyrex closes its associated LazyGit float and process.
+- When Neovim exits, lazyrex closes its associated LazyGit float and process, **this fails if the floating pane was docked**
 
 ## Requirements
 
