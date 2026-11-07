@@ -22,6 +22,25 @@ local function check_requirements(config)
 	if vim.fn.executable(config.rex_path) ~= 1 then return "rex is not available on PATH" end
 end
 
+local function close_lazygit(config)
+	if nvim_server == nil or vim.env.REX_SESSION == nil then return end
+
+	pcall(function()
+		vim.system({
+			config.rex_path,
+			"do",
+			"--session",
+			vim.env.REX_SESSION,
+			rex_scripts_dir .. "/close.lua",
+			"--args",
+			vim.json.encode({
+				label = "lazygit:" .. nvim_server,
+				rex_dir = rex_scripts_dir,
+			}),
+		}, { text = true }):wait()
+	end)
+end
+
 local function open_lazygit(config)
 	local err = check_requirements(config)
 	if err then
@@ -55,9 +74,21 @@ end
 ---@param options? table
 function M.setup(options)
 	local config = config_module.setup(options)
+
+	-- creating LazyRex use command
 	vim.api.nvim_create_user_command("Lazyrex", function()
 		open_lazygit(config)
 	end, { desc = "Open LazyGit in Rex", force = true })
+
+	-- creating auto command for gracefully shutdown
+	local group = vim.api.nvim_create_augroup("lazyrex.nvim", { clear = true })
+	vim.api.nvim_create_autocmd("VimLeavePre", {
+		group = group,
+		callback = function()
+			close_lazygit(config)
+		end,
+		desc = "Close Lazyrex LazyGit when Neovim exits",
+	})
 end
 
 return M
