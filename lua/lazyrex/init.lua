@@ -61,6 +61,7 @@ local function open_lazygit(config)
 		"--args",
 		vim.json.encode({
 			nvim_server = server,
+			nvim_block = vim.env.REX_BLOCK,
 			rex_dir = rex_scripts_dir,
 			bounds = config.bounds,
 			lazygit_command = config.lazygit_command,

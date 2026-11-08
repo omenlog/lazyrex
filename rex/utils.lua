@@ -19,6 +19,14 @@ function M.get_layer(block_id, label)
 	end)
 end
 
+function M.minimize_layer(layer)
+	if layer == nil or layer.kind ~= "floating" then return end
+	return rex.session.set_layer_state({
+		layer_id = layer.layer_id,
+		state = "minimized",
+	})
+end
+
 function M.get_block_id_by_label(label)
 	local layer, layer_err = find_layer(function(block)
 		return block.label == label

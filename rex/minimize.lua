@@ -18,10 +18,6 @@ local utils = require("utils")
 local layer, layer_err = utils.get_layer(rex.block_id, lazygit_label)
 if layer_err ~= nil then error(layer_err, 0) end
 if layer == nil then error("LazyGit layer not found", 0) end
-if layer.kind ~= "floating" then return end
 
-local _, minimize_err = rex.session.set_layer_state({
-	layer_id = layer.layer_id,
-	state = "minimized",
-})
+local _, minimize_err = utils.minimize_layer(layer)
 if minimize_err ~= nil then error(minimize_err, 0) end

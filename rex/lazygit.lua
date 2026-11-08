@@ -8,6 +8,9 @@ end
 if type(args.nvim_server) ~= "string" or args.nvim_server == "" then
 	error("Missing Neovim server address", 0)
 end
+if type(args.nvim_block) ~= "string" or args.nvim_block == "" then
+	error("Missing Neovim block ID", 0)
+end
 if type(args.rex_dir) ~= "string" or args.rex_dir == "" then
 	error("Missing lazyrex Rex script directory", 0)
 end
@@ -66,6 +69,7 @@ local command = {
 	"LG_CONFIG_FILE=" .. lazygit_config_files(),
 	"LAZYREX_REX_DIR=" .. args.rex_dir,
 	"LAZYREX_LABEL=" .. label,
+	"LAZYREX_NVIM_BLOCK=" .. args.nvim_block,
 	"NVIM=" .. args.nvim_server,
 }
 for _, argument in ipairs(args.lazygit_command) do
