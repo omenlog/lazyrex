@@ -45,7 +45,7 @@ if view_err ~= nil then error(view_err, 0) end
 for _, window in ipairs(view.windows or {}) do
 	for _, layer in ipairs(window.layers or {}) do
 		for _, block in ipairs(layer.blocks or {}) do
-			if layer.kind == "floating" and block.label == label then
+			if block.label == label then
 				local status = rex.block.call(terminal, "process", { block_id = block.block_id })
 				if status ~= nil and status.last_exit == nil then
 					local restored, restore_err = rex.session.set_layer_state({

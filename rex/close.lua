@@ -10,10 +10,13 @@ end
 package.path = args.rex_dir .. "/?.lua;" .. package.path
 local utils = require("utils")
 
-local layer_id, layer_err = utils.get_floating_layer_id_by_label(args.label)
-if layer_err ~= nil then error(layer_err, 0) end
-if layer_id == nil then return end
+local block_id, block_err = utils.get_block_id_by_label(args.label)
+if block_err ~= nil then error(block_err, 0) end
+if block_id == nil then return end
 
-local closed, close_err = rex.session.close_layer({ layer_id = layer_id })
+local closed, close_err = rex.call("block.close", {
+	session_id = rex.session_id,
+	block_id = block_id,
+})
 if close_err ~= nil then error(close_err, 0) end
 return closed
